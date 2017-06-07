@@ -1,41 +1,41 @@
 package unit_tests;
 
 import org.junit.Test;
-import passwords.PasswordValidator;
+import passwordValidation.PasswordValidator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class PasswordValidatorTest {
-
     @Test
-    public void invalid_password_because_it_lacks_an_underscore() {
-        assertThat(PasswordValidator.isValid("1Aa222222"), is(false));
+    public void shouldContainLowerCase() {
+        assertThat(PasswordValidator.isValid("ABC_12345"), is(false));
     }
 
     @Test
-    public void valid_password() {
-        assertThat(PasswordValidator.isValid("1Aa______"), is(true));
+    public void validPassword() {
+        assertThat(PasswordValidator.isValid("Pass_Wor1"), is(true));
     }
 
     @Test
-    public void invalid_password_because_it_lacks_a_number() {
-        assertThat(PasswordValidator.isValid("aA_______"), is(false));
+    public void shouldContainMoreThanEightCharacters() {
+        assertThat(PasswordValidator.isValid("A1_b2345"), is(false));
     }
 
     @Test
-    public void invalid_password_because_it_lacks_a_lowercase() {
-        assertThat(PasswordValidator.isValid("A1________"), is(false));
+    public void shouldContainUpperCase() {
+        assertThat(PasswordValidator.isValid("abc_12345"), is(false));
     }
 
     @Test
-    public void invalid_password_because_it_lacks_an_uppercase() {
-        assertThat(PasswordValidator.isValid("a1________"), is(false));
+    public void shouldContainANumber() {
+        assertThat(PasswordValidator.isValid("abc_efghI"), is(false));
     }
 
     @Test
-    public void invalid_password_because_it_is_too_short() {
-        assertThat(PasswordValidator.isValid("a1A_____"), is(false));
+    public void shouldContainUnderscore() {
+        assertThat(PasswordValidator.isValid("abc4efghI"), is(false));
     }
+
 
 }
